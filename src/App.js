@@ -9,26 +9,44 @@ function App() {
 
   const [starships, setStarships] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
+  const [cardIndex, setCardIndex] = useState(null);
 
   useEffect(() => {
     axios
       .get(`https://swapi.dev/api/starships/`)
       .then((res) => setStarships(res.data.results))
       .catch((err) => console.log(err));
-  }, []);
+  }, [showDetails]);
 
-   console.log(starships)
+
+   const handleClick = (index) => {
+    setShowDetails(!showDetails)
+    setCardIndex(index)
+    // console.log(index)
+   }
   
-
   return (
     <div className="App">
       <Header />
       <div className="card-list">
-        {!showDetails &&
-          starships.map((starship) => (
-            <Card key={starship.name} starship={starship} />
-          ))}
-        {showDetails && <Details starships={starships} />}
+        {!showDetails ? (
+          starships.map((starship, i) => (
+            <Card
+              key={i}
+              starship={starship}
+              handleClick={handleClick}
+              id={i}
+            />
+          ))
+        ) : (
+          <Details
+            starships={starships}
+            cardIndex={cardIndex}
+            setCardIndex={setCardIndex}
+            showDetails={showDetails}
+            setShowDetails={setShowDetails}
+          />
+        )}
       </div>
     </div>
   );

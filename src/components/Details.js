@@ -1,19 +1,24 @@
 import React from "react";
 
-const Details = ({ starships }) => {
+const Details = ({ starships, showDetails, setShowDetails, cardIndex,setCardIndex}) => {
+
+  const displayDetails = (e) => {
+    setShowDetails(!showDetails);
+    setCardIndex(null);
+  }
 
   return (
     <div className="details-card">
-      <h2>Name: {starships[0].name}</h2>
-      <h2>Model: {starships[0].model}</h2>
-      <h2>Class: {starships[0].starship_class}</h2>
-      <h2>Capacity:{starships[0].cargo_capacity}</h2>
-      <h2>{starships[0].manufacturer}</h2>
-      <h2>Created: {starships[0].created}</h2>
-      <h2>Edited: {starships[0].edited}</h2>
-      <h2>Crew:{starships[0].crew}</h2>
-      <h2>Cost: {starships[0].cost_in_credits}</h2>
-      <h3>Back Home</h3>
+      <h4>Name: {starships[cardIndex].name}</h4>
+      <h4>Model: {starships[cardIndex].model}</h4>
+      <h4>Class: {starships[cardIndex].starship_class}</h4>
+      <h4>Capacity:{starships[cardIndex].cargo_capacity}</h4>
+      <h4>{starships[cardIndex].manufacturer}</h4>
+      <h4>Created: {starships[cardIndex].created}</h4>
+      <h4>Edited: {starships[cardIndex].edited}</h4>
+      <h4>Crew:{starships[cardIndex].crew}</h4>
+      <h4>Cost: {starships[cardIndex].cost_in_credits}</h4>
+      <button onClick={() => displayDetails()}>Back Home</button>
     </div>
   );
 };
