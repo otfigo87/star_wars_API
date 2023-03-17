@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import Header from "./components/Header";
-// import Details from './components/Details';
+import Details from './components/Details';
 import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [starships, setStarships] = useState([]);
 
-  // const [showDetails, setShowDetails] = useState(false);
+  const [starships, setStarships] = useState([]);
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     axios
@@ -16,23 +16,20 @@ function App() {
       .then((res) => setStarships(res.data.results))
       .catch((err) => console.log(err));
   }, []);
-console.log(starships)
-  // const handleClick = () => {
-  //   setShowDetails(!showDetails);
-  // };
+
+   console.log(starships)
+  
 
   return (
     <div className="App">
       <Header />
       <div className="card-list">
-          {starships.map((starship) => (
-            <Card
-              key={starship.name}
-              starship={starship}
-              // handleClick={handleClick()}
-            />
+        {!showDetails &&
+          starships.map((starship) => (
+            <Card key={starship.name} starship={starship} />
           ))}
-        </div>
+        {showDetails && <Details starships={starships} />}
+      </div>
     </div>
   );
 }

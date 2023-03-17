@@ -1,12 +1,12 @@
 
-const Card = ({starship, handleClick}) => {
+const Card = ({starship}) => {
 
 
   return (
     <>
       <div className="card">
         <h3>{starship.name}</h3>
-        <h5 onClick={() => handleClick}>Details...</h5>
+        <h5>Details...</h5>
       </div>
     </>
   );   
