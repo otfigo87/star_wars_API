@@ -1,8 +1,10 @@
-import axios from 'axios';
-
-export const getData = () => {
-    axios
-      .get(`https://swapi.dev/api/starships/`)
-      .then((res) => console.log(res.data.results))
-      .catch((err) => console.log(err));
+export const getData = async() => {
+  try {
+    const response = await fetch(`https://swapi.dev/api/starships/`);
+    const data = await response.json();
+    return data.data.results;
+  }
+  catch(err) {
+    console.error(err)
+  }   
 }

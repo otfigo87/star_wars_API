@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import Header from "./components/Header";
 import Details from './components/Details';
-import axios from "axios";
 import "./App.css";
+import  { getData } from 'services/sw-api';
 
 function App() {
 
@@ -12,10 +12,10 @@ function App() {
   const [cardIndex, setCardIndex] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`https://swapi.dev/api/starships/`)
-      .then((res) => setStarships(res.data.results))
-      .catch((err) => console.log(err));
+    const myData = async() => {
+      const result= await getData();
+      setStarships(result) } ;
+     myData(); 
   }, [showDetails]);
 
 
